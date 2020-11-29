@@ -8,4 +8,13 @@ import org.springframework.stereotype.Repository;
 public interface PersonalMapper {
 
     Personal selectUserByid(int uid);
+    
+    Personal selectUserByName(String name);
+
+    boolean signUp(Personal person);
+
+    int maxId();
+
+    String logInPW(String username);
+    
 }
