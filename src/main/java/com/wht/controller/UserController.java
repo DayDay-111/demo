@@ -45,6 +45,34 @@ public class UserController {
         System.out.println(userid);
         return userService.findUserByid(userid);
     }
+    
+    
+    @PostMapping("/signUp")
+    public Personal signIn(@RequestBody Personal person){
+        person.setBalance(0);
+        int id = userService.maxId() + 1;
+        person.setUid(id);
+        if(userService.signUp(person)){
+            return userService.findUserByid(id);
+        }
+        else {
+            return null;
+        }
+    }
+
+    @PostMapping("/logIn")
+    public Personal logIn(@RequestBody Personal person){
+        String username = person.getUsername();
+        String passwd = person.getPassword();
+        String pw = userService.logInPW(username);
+        if(passwd.equals(pw)){
+            return userService.findUserByName(username);
+        }
+        else {
+            return null;
+        }
+    }
+
 
 
 
