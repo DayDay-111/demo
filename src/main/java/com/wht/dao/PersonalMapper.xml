@@ -19,6 +19,28 @@
             resultType="com.wht.entity.Personal">
         SELECT * FROM personal where uid = #{uid}
     </select>
+        
+        <select id="selectUserByName" parameterType="java.lang.String"
+            resultType="com.wht.entity.Personal">
+        SELECT * FROM personal where username = #{name}
+    </select>
+
+
+    <select id="maxId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT MAX(uid) FROM personal
+    </select>
+
+    <insert id="signUp" parameterType="com.wht.entity.Personal">
+	    INSERT INTO personal(uid,username,password,location,gender,age,phone,balance,role,email
+	    )VALUES
+	    (#{uid},#{username},#{password},#{location},#{gender},#{age},#{phone},#{balance},#{role},#{email}
+	    )
+	</insert>
+
+	<select id="logInPW" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT password FROM personal WHERE username = #{username}
+    </select>
+
 
 
 </mapper>
