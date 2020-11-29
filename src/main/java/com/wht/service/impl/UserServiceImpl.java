@@ -15,6 +15,36 @@ public class UserServiceImpl implements UserService {
     public Personal findUserByid(int uid) {
         return personalMapper.selectUserByid(uid);
     }
+    
+    
+    @Override
+    public Personal findUserByName(String name) {
+        return personalMapper.selectUserByName(name);
+    }
+
+    @Override
+    public boolean signUp(Personal person){
+        try {
+            personalMapper.signUp(person);
+            return true;
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    @Override
+    public int maxId(){
+        return personalMapper.maxId();
+    }
+
+    @Override
+    public String logInPW(String username) {
+        return personalMapper.logInPW(username);
+    }
+
+
 
 
 }
