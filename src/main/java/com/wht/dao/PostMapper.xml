@@ -17,5 +17,29 @@
     </resultMap>
 
 
+    <update id="insertPost" parameterType="com.wht.entity.Post">
+        INSERT INTO post
+        VALUES (#{pid}, #{poster}, #{deliver},#{topic}, #{description}, #{location},#{price},#{createTime},#{dueTime},#{status},#{comment})
+    </update>
 
+    <select id="selectPostByUid" parameterType="java.lang.Integer"
+            resultType="com.wht.entity.Post">
+        SELECT * FROM post where poster = #{uid}
+    </select>
+
+    <select id="selectDonePostByUid" parameterType="java.lang.Integer"
+            resultType="com.wht.entity.Post">
+        SELECT * FROM post where poster = #{uid} and status= 2
+    </select>
+
+    <select id="selectPostByPid" parameterType="java.lang.Integer"
+            resultType="com.wht.entity.Post">
+        SELECT * FROM post where pid = #{pid}
+    </select>
+
+    <update id="updatePost" parameterType="com.wht.entity.Post">
+        UPDATE post
+        set status=#{status}, comment=#{comment}
+        WHERE pid = #{pid}
+    </update>
 </mapper>

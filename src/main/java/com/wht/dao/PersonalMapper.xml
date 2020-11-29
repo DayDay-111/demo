@@ -12,10 +12,11 @@
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="balance" property="balance" jdbcType="INTEGER"/>
         <result column="role" property="role" jdbcType="INTEGER"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectUserByid" parameterType="java.lang.Integer"
-            resultMap="BaseResultMap">
+            resultType="com.wht.entity.Personal">
         SELECT * FROM personal where uid = #{uid}
     </select>
 

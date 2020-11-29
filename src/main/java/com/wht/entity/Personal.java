@@ -1,5 +1,8 @@
 package com.wht.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+@ApiModel
 public class Personal {
     private int uid;
     private String username;
@@ -9,7 +12,19 @@ public class Personal {
     private int age;
     private String phone;
     private int balance;
+
+    @ApiModelProperty(notes="用户0，配送员1")
     private int role;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    private String email;
 
     public int getUid() {
         return uid;

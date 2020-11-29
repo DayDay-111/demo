@@ -1,7 +1,11 @@
 package com.wht.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.sql.Timestamp;
 
+@ApiModel
 public class Post {
     private int pid;
     private int poster;
@@ -10,8 +14,25 @@ public class Post {
     private String description;
     private String location;
     private int price;
-    private Timestamp createtTime;
-    private Timestamp dueTime;
+    private String createTime;
+    private String dueTime;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createtTime) {
+        this.createTime = createtTime;
+    }
+
+    public String getDueTime() {
+        return dueTime;
+    }
+
+    public void setDueTime(String dueTime) {
+        this.dueTime = dueTime;
+    }
+    @ApiModelProperty(notes="等待接单0，已经接单1，完成接单2")
     private int status;
     private String comment;
 
@@ -71,21 +92,7 @@ public class Post {
         this.price = price;
     }
 
-    public Timestamp getCreatetTime() {
-        return createtTime;
-    }
 
-    public void setCreatetTime(Timestamp createtTime) {
-        this.createtTime = createtTime;
-    }
-
-    public Timestamp getDueTime() {
-        return dueTime;
-    }
-
-    public void setDueTime(Timestamp dueTime) {
-        this.dueTime = dueTime;
-    }
 
     public int getStatus() {
         return status;
