@@ -14,5 +14,5 @@ public interface UserService {
 
     String logInPW(String username);
 
-
+    void updatePersonInfo(Personal personal);
 }

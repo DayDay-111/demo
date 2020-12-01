@@ -44,7 +44,10 @@ public class UserServiceImpl implements UserService {
         return personalMapper.logInPW(username);
     }
 
-
+    @Override
+    public void updatePersonInfo(Personal personal) {
+        personalMapper.updateInfo(personal);
+    }
 
 
 }

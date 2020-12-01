@@ -59,8 +59,15 @@ public class PostController {
     public Post UpdatePostBypid( @PathVariable("postid") Integer postid, @RequestBody Post post){
         post.setPid(postid);
         postService.updatePostBypid(post);
-        return post;
+        return postService.findPostByPid(postid);
     }
 
+    @ApiOperation(value="获取正在进行的订单", notes = "有发起的或正在配送的，返回一个对象，否则空")
+    @ApiImplicitParam(name="userid",value="用户ID",required = true,dataType = "Integer",paramType = "path")
+    @RequestMapping(value="/posts/Doingpost/{userid}",method=RequestMethod.GET)
+    public Post DoingPost(@PathVariable("userid") Integer userid){
+        System.out.println(userid);
+        return postService.NewPostByUid(userid);
+    }
 
 }

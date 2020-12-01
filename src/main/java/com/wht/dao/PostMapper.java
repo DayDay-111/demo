@@ -14,4 +14,6 @@ public interface PostMapper {
     Post selectPostByPid(int pid);
 
     void updatePost(Post post);
+
+    Post selectDoingByUid(int uid);
 }

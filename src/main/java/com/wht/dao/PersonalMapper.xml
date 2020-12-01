@@ -41,6 +41,11 @@
         SELECT password FROM personal WHERE username = #{username}
     </select>
 
+    <update id="updateInfo" parameterType="com.wht.entity.Personal">
+        UPDATE personal
+        set username=#{username}, password=#{password},location=#{location},gender=#{gender},age=#{age},phone=#{phone},email=#{email}
+        WHERE uid = #{uid}
+    </update>
 
 
 </mapper>

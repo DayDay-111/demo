@@ -42,4 +42,9 @@
         set status=#{status}, comment=#{comment}
         WHERE pid = #{pid}
     </update>
+
+    <select id="selectDoingByUid" parameterType="java.lang.Integer"
+            resultType="com.wht.entity.Post">
+        SELECT * FROM post where poster = #{uid} and (status= 0 or status=1)
+    </select>
 </mapper>

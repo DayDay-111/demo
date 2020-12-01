@@ -43,4 +43,9 @@ public class PostServiceImpl implements PostService {
     public void updatePostBypid(Post post) {
         postMapper.updatePost(post);
     }
+
+    @Override
+    public Post NewPostByUid(int uid) {
+        return postMapper.selectDoingByUid(uid);
+    }
 }

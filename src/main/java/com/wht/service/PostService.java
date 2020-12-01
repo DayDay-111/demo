@@ -14,4 +14,6 @@ public interface PostService {
     Post findPostByPid(int pid);
 
     void updatePostBypid(Post post);
+
+    Post NewPostByUid(int uid);
 }

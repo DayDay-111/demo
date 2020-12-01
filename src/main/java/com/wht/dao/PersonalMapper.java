@@ -16,5 +16,7 @@ public interface PersonalMapper {
     int maxId();
 
     String logInPW(String username);
+
+    void updateInfo(Personal personal);
     
 }

@@ -74,7 +74,17 @@ public class UserController {
         }
     }
 
-
+    @ApiOperation(value = "update a post by postid")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="userid",value="用户id",required = true,dataType = "Integer",paramType = "path"),
+            @ApiImplicitParam(name="personal",value="用户实体",required = true,dataType = "Personal")
+    })
+    @RequestMapping(value="/users/user/{userid}",method=RequestMethod.PUT)
+    public Personal UpdatePostBypid( @PathVariable("userid") Integer userid, @RequestBody Personal personal){
+        personal.setUid(userid);
+        userService.updatePersonInfo(personal);
+        return userService.findUserByid(userid);
+    }
 
 
 }
