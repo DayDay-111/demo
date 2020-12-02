@@ -29,7 +29,7 @@
 
     <select id="selectDonePostByUid" parameterType="java.lang.Integer"
             resultType="com.wht.entity.Post">
-        SELECT * FROM post where poster = #{uid} and status= 2
+        SELECT * FROM post where poster = #{uid} and status= 3
     </select>
 
     <select id="selectPostByPid" parameterType="java.lang.Integer"
@@ -45,6 +45,6 @@
 
     <select id="selectDoingByUid" parameterType="java.lang.Integer"
             resultType="com.wht.entity.Post">
-        SELECT * FROM post where poster = #{uid} and (status= 0 or status=1)
+        SELECT * FROM post where poster = #{uid} and (status= 0 or status=1 or status =2)
     </select>
 </mapper>

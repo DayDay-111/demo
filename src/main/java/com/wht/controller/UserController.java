@@ -74,7 +74,7 @@ public class UserController {
         }
     }
 
-    @ApiOperation(value = "update a post by postid")
+    @ApiOperation(value = "update user profile by userid")
     @ApiImplicitParams({
             @ApiImplicitParam(name="userid",value="用户id",required = true,dataType = "Integer",paramType = "path"),
             @ApiImplicitParam(name="personal",value="用户实体",required = true,dataType = "Personal")
