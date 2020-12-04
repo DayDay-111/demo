@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -19,9 +20,16 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void createPost(Post post) {
-        String nowTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        Date now = new Date();
+        String nowTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(now);
         //java.sql.Timestamp time= Timestamp.valueOf(nowTime);
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(now);
+        calendar.add(Calendar.HOUR,1);
+        Date due = calendar.getTime();
+        String dutTime =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(due);
         post.setCreateTime(nowTime);
+        post.setDueTime(dutTime);
         postMapper.insertPost(post);
     }
 
