@@ -19,4 +19,8 @@ public interface PostMapper {
     Post selectDoingByUid(int uid);
 
     List<ReturnPost> selectAllPostByUid(int uid);
+
+    List<Post> selectAllNotTakenPosts();
+
+    List<Post> selectAllCompletedAndDoingPosts(int uid);
 }

@@ -19,4 +19,8 @@ public interface PostService {
     Post NewPostByUid(int uid);
 
     List<ReturnPost> AllReturnPostByPoster(int uid);
+
+    List<Post> AllNotTakenPosts();
+
+    List<Post> AllCompletedAndDoingPosts(int uid);
 }

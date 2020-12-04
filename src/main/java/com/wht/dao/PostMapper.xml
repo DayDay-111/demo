@@ -72,4 +72,16 @@
 from post,personal p1,personal p2
 where post.poster=p1.uid and post.deliver=p2.uid
     </select>
+
+    <select id="selectAllNotTakenPosts"
+            resultType="com.wht.entity.Post">
+       SELECT * FROM post where status = 0 and deliver = 0
+    </select>
+
+    <select id="selectAllCompletedAndDoingPosts" parameterType="java.lang.Integer"
+            resultType="com.wht.entity.Post">
+       SELECT * FROM post where (status = 1 or status = 2 or status = 3) and deliver = #{uid}
+    </select>
+
+
 </mapper>

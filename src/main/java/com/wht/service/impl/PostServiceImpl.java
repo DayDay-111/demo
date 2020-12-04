@@ -62,4 +62,14 @@ public class PostServiceImpl implements PostService {
     public List<ReturnPost> AllReturnPostByPoster(int uid) {
         return postMapper.selectAllPostByUid(uid);
     }
+
+    @Override
+    public List<Post> AllNotTakenPosts() {
+        return postMapper.selectAllNotTakenPosts();
+    }
+
+    @Override
+    public List<Post> AllCompletedAndDoingPosts(int uid) {
+        return postMapper.selectAllCompletedAndDoingPosts(uid);
+    }
 }
