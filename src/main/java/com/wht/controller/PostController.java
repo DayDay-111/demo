@@ -3,6 +3,7 @@ package com.wht.controller;
 import com.wht.dao.PostMapper;
 import com.wht.entity.Personal;
 import com.wht.entity.Post;
+import com.wht.entity.ReturnPost;
 import com.wht.service.PostService;
 import com.wht.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -12,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -34,9 +36,9 @@ public class PostController {
     @ApiOperation(value="get all posts by userId")
     @ApiImplicitParam(name="userid",value="用户ID",required = true,dataType = "Integer",paramType = "path")
     @RequestMapping(value="/posts/user/{userid}",method=RequestMethod.GET)
-    public List<Post> find(@PathVariable("userid") Integer userid){
-        System.out.println(userid);
-        return postService.AllPostByUid(userid);
+    public List<ReturnPost> find(@PathVariable("userid") Integer userid){
+
+        return postService.AllReturnPostByPoster(userid);
     }
 
     @ApiOperation(value="get all completed posts by userId")
@@ -80,146 +82,25 @@ public class PostController {
     @ApiOperation(value="获取正在进行的订单", notes = "有发起的或正在配送的，返回一个对象，否则空")
     @ApiImplicitParam(name="userid",value="用户ID",required = true,dataType = "Integer",paramType = "path")
     @RequestMapping(value="/posts/Doingpost/{userid}",method=RequestMethod.GET)
-    public Post DoingPost(@PathVariable("userid") Integer userid){
+    public List<ReturnPost> DoingPost(@PathVariable("userid") Integer userid){
         System.out.println(userid);
-        return postService.NewPostByUid(userid);
+        Post post = postService.NewPostByUid(userid);
+        ReturnPost returnPost=new ReturnPost();
+        List<ReturnPost> list = new ArrayList();
+        if(post!=null){
+            BeanUtils.copyProperties(post,returnPost);
+            Personal postPer = userService.findUserByid(post.getPoster());
+            Personal deliverPer = userService.findUserByid(post.getDeliver());
+            returnPost.setPostName(postPer.getUsername());
+            returnPost.setPostPhone(postPer.getPhone());
+            returnPost.setDeliverName(deliverPer.getUsername());
+            returnPost.setDeliverPhone(deliverPer.getPhone());
+            list.add(returnPost);
+            return list;
+        }else{
+            return list;
+        }
+
     }
-    public class ReturnPost{
-        private int pid;
-        private int poster;
 
-        public int getPid() {
-            return pid;
-        }
-
-        public void setPid(int pid) {
-            this.pid = pid;
-        }
-
-        public int getPoster() {
-            return poster;
-        }
-
-        public void setPoster(int poster) {
-            this.poster = poster;
-        }
-
-        public String getPostName() {
-            return postName;
-        }
-
-        public void setPostName(String postName) {
-            this.postName = postName;
-        }
-
-        public String getPostPhone() {
-            return postPhone;
-        }
-
-        public void setPostPhone(String postPhone) {
-            this.postPhone = postPhone;
-        }
-
-        public int getDeliver() {
-            return deliver;
-        }
-
-        public void setDeliver(int deliver) {
-            this.deliver = deliver;
-        }
-
-        public String getDeliverName() {
-            return deliverName;
-        }
-
-        public void setDeliverName(String deliverName) {
-            this.deliverName = deliverName;
-        }
-
-        public String getDeliverPhone() {
-            return deliverPhone;
-        }
-
-        public void setDeliverPhone(String deliverPhone) {
-            this.deliverPhone = deliverPhone;
-        }
-
-        public String getTopic() {
-            return topic;
-        }
-
-        public void setTopic(String topic) {
-            this.topic = topic;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        public String getLocation() {
-            return location;
-        }
-
-        public void setLocation(String location) {
-            this.location = location;
-        }
-
-        public int getPrice() {
-            return price;
-        }
-
-        public void setPrice(int price) {
-            this.price = price;
-        }
-
-        public String getCreateTime() {
-            return createTime;
-        }
-
-        public void setCreateTime(String createTime) {
-            this.createTime = createTime;
-        }
-
-        public String getDueTime() {
-            return dueTime;
-        }
-
-        public void setDueTime(String dueTime) {
-            this.dueTime = dueTime;
-        }
-
-        public int getStatus() {
-            return status;
-        }
-
-        public void setStatus(int status) {
-            this.status = status;
-        }
-
-        public String getComment() {
-            return comment;
-        }
-
-        public void setComment(String comment) {
-            this.comment = comment;
-        }
-
-        private String postName;
-        private String postPhone;
-        private int deliver;
-        private String deliverName;
-        private String deliverPhone;
-        private String topic;
-        private String description;
-        private String location;
-        private int price;
-        private String createTime;
-        private String dueTime;
-        private int status;
-        private String comment;
-    }
 }

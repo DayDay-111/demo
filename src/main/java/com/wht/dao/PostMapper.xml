@@ -16,6 +16,24 @@
         <result column="comment" property="comment" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap id="BaseResultMap1" type="com.wht.entity.ReturnPost">
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="poster" property="poster" jdbcType="INTEGER"/>
+        <result column="deliver" property="deliver" jdbcType="INTEGER"/>
+        <result column="topic" property="topic" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="location" property="location" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="INTEGER"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="duetime" property="dueTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="comment" property="comment" jdbcType="VARCHAR"/>
+        <result column="postName" property="postName" jdbcType="VARCHAR"/>
+        <result column="postPhone" property="postPhone" jdbcType="VARCHAR"/>
+        <result column="deliverName" property="deliverName" jdbcType="VARCHAR"/>
+        <result column="deliverPhone" property="deliverPhone" jdbcType="VARCHAR"/>
+    </resultMap>
+
 
     <update id="insertPost" parameterType="com.wht.entity.Post">
         INSERT INTO post
@@ -29,7 +47,7 @@
 
     <select id="selectDonePostByUid" parameterType="java.lang.Integer"
             resultType="com.wht.entity.Post">
-        SELECT * FROM post where poster = #{uid} and status= 3
+        SELECT * FROM post where poster = #{uid} and (status= 3 or status=4)
     </select>
 
     <select id="selectPostByPid" parameterType="java.lang.Integer"
@@ -39,12 +57,19 @@
 
     <update id="updatePost" parameterType="com.wht.entity.Post">
         UPDATE post
-        set status=#{status}, comment=#{comment}
+        set deliver=#{deliver}, status=#{status}, comment=#{comment}
         WHERE pid = #{pid}
     </update>
 
     <select id="selectDoingByUid" parameterType="java.lang.Integer"
             resultType="com.wht.entity.Post">
         SELECT * FROM post where poster = #{uid} and (status= 0 or status=1 or status =2)
+    </select>
+
+    <select id="selectAllPostByUid" parameterType="java.lang.Integer"
+            resultType="com.wht.entity.ReturnPost">
+        SELECT pid,poster,deliver,topic,description,post.location,price,createtime,duetime,`status`,p1.username as postname, p1.phone as postphone,p2.username as delivername, p2.phone as deliverphone
+from post,personal p1,personal p2
+where post.poster=p1.uid and post.deliver=p2.uid
     </select>
 </mapper>

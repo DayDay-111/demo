@@ -1,6 +1,7 @@
 package com.wht.service;
 
 import com.wht.entity.Post;
+import com.wht.entity.ReturnPost;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface PostService {
     void updatePostBypid(Post post);
 
     Post NewPostByUid(int uid);
+
+    List<ReturnPost> AllReturnPostByPoster(int uid);
 }

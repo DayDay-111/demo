@@ -1,6 +1,7 @@
 package com.wht.dao;
 
 import com.wht.entity.Post;
+import com.wht.entity.ReturnPost;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface PostMapper {
     void updatePost(Post post);
 
     Post selectDoingByUid(int uid);
+
+    List<ReturnPost> selectAllPostByUid(int uid);
 }

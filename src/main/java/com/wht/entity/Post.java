@@ -32,7 +32,7 @@ public class Post {
     public void setDueTime(String dueTime) {
         this.dueTime = dueTime;
     }
-    @ApiModelProperty(notes="等待接单0，已经接单1，完成接单2")
+    @ApiModelProperty(notes="等待接单0，已经接单1，跑腿完成接单2，发布者完成3，废单4")
     private int status;
     private String comment;
 

@@ -2,6 +2,7 @@ package com.wht.service.impl;
 
 import com.wht.dao.PostMapper;
 import com.wht.entity.Post;
+import com.wht.entity.ReturnPost;
 import com.wht.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post NewPostByUid(int uid) {
         return postMapper.selectDoingByUid(uid);
+    }
+
+    @Override
+    public List<ReturnPost> AllReturnPostByPoster(int uid) {
+        return postMapper.selectAllPostByUid(uid);
     }
 }
