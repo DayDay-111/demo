@@ -23,7 +23,7 @@ public class DeliverController {
     private PostService postService;
 
     @ApiOperation(value="Get all not taken posts")
-    @RequestMapping(value="/deliver/getAllNotTakenPosts/",method= RequestMethod.POST)
+    @RequestMapping(value="/deliver/getAllNotTakenPosts/",method= RequestMethod.GET)
     public List<Post> getAllNotTakenPosts(){
         return postService.AllNotTakenPosts();
     }
