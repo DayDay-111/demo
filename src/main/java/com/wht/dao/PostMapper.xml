@@ -70,7 +70,7 @@
             resultType="com.wht.entity.ReturnPost">
         SELECT pid,poster,deliver,topic,description,post.location,price,createtime,duetime,`status`,p1.username as postname, p1.phone as postphone,p2.username as delivername, p2.phone as deliverphone
 from post,personal p1,personal p2
-where post.poster=p1.uid and post.deliver=p2.uid
+where poster=#{uid} and post.poster=p1.uid and post.deliver=p2.uid
     </select>
 
     <select id="selectAllNotTakenPosts"
