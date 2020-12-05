@@ -98,11 +98,14 @@ public class PostController {
         if(post!=null){
             BeanUtils.copyProperties(post,returnPost);
             Personal postPer = userService.findUserByid(post.getPoster());
-            Personal deliverPer = userService.findUserByid(post.getDeliver());
             returnPost.setPostName(postPer.getUsername());
             returnPost.setPostPhone(postPer.getPhone());
-            returnPost.setDeliverName(deliverPer.getUsername());
-            returnPost.setDeliverPhone(deliverPer.getPhone());
+
+            if(post.getDeliver()!=0){
+                Personal deliverPer = userService.findUserByid(post.getDeliver());
+                returnPost.setDeliverName(deliverPer.getUsername());
+                returnPost.setDeliverPhone(deliverPer.getPhone());
+            }
             list.add(returnPost);
             return list;
         }else{
