@@ -27,10 +27,18 @@ public class PostController {
     @ApiOperation(value="create new post by userId",notes = "createtime,comment不用传，")
     //@ApiImplicitParam(name="userid",value="用户ID",required = true,dataType = "Integer",paramType = "path")
     @RequestMapping(value="/posts/post/",method= RequestMethod.POST)
-    public void find(@RequestBody Post post){
+    public List<ReturnPost> find(@RequestBody Post post){
         postService.createPost(post);
         System.out.println(post.getComment());
-        return ;
+        postService.NewPostByUid(post.getPoster());
+        List<ReturnPost> list =new ArrayList();
+        ReturnPost returnPost = new ReturnPost();
+        BeanUtils.copyProperties(post,returnPost);
+        Personal postPer = userService.findUserByid(post.getPoster());
+        returnPost.setPostName(postPer.getUsername());
+        returnPost.setPostPhone(postPer.getPhone());
+        list.add(returnPost);
+        return list;
     }
 
     @ApiOperation(value="get all posts by userId")
