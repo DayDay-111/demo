@@ -1,5 +1,6 @@
 package com.wht.service.impl;
 
+import com.wht.dao.PersonalMapper;
 import com.wht.dao.PostMapper;
 import com.wht.entity.Post;
 import com.wht.entity.ReturnPost;
@@ -17,7 +18,8 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
     @Autowired
     private PostMapper postMapper;
-
+    @Autowired
+    private PersonalMapper personalMapper;
     @Override
     public void createPost(Post post) {
         Date now = new Date();
@@ -60,7 +62,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<ReturnPost> AllReturnPostByPoster(int uid) {
-        return postMapper.selectAllPostByUid(uid);
+        int role =personalMapper.getRolByUid(uid);
+        if(role==1){
+            return postMapper.selectAllPostByUid(uid);
+        }else{
+            return postMapper.selectAllPostByDeliver(uid);
+        }
+
     }
 
     @Override

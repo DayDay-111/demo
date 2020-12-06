@@ -73,6 +73,13 @@ from post,personal p1,personal p2
 where poster=#{uid} and post.poster=p1.uid and post.deliver=p2.uid
     </select>
 
+    <select id="selectAllPostByDeliver" parameterType="java.lang.Integer"
+            resultType="com.wht.entity.ReturnPost">
+        SELECT pid,poster,deliver,topic,description,post.location,price,createtime,duetime,`status`,p1.username as postname, p1.phone as postphone,p2.username as delivername, p2.phone as deliverphone
+from post,personal p1,personal p2
+where deliver=#{uid} and post.poster=p1.uid and post.deliver=p2.uid
+    </select>
+
     <select id="selectAllNotTakenPosts"
             resultType="com.wht.entity.Post">
        SELECT * FROM post where status = 0 and deliver = 0

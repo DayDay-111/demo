@@ -18,5 +18,6 @@ public interface PersonalMapper {
     String logInPW(String username);
 
     void updateInfo(Personal personal);
-    
+
+    int getRolByUid(int uid);
 }

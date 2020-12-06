@@ -47,5 +47,8 @@
         WHERE uid = #{uid}
     </update>
 
+    <select id="getRolByUid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT role FROM personal WHERE uid = #{uid}
+    </select>
 
 </mapper>
